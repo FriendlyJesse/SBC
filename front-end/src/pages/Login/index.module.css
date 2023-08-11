@@ -20,6 +20,12 @@
   margin-top: 50px;
   margin-bottom: 50px;
 }
+.form {
+  text-align: center;
+}
+.form_item {
+  text-align: center;
+}
 
 .writer_info {
   position: absolute;
