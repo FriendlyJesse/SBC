@@ -1,7 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import styles from './index.module.css'
 
 function Main () {
+  const navigate = useNavigate()
   const inputRef = useRef('')
   // get UserInfo
   let userInfo = localStorage.getItem('userInfo')
@@ -127,9 +129,15 @@ function Main () {
   //   return false
   // }
   
+  // logout
+  function logout () {
+    localStorage.removeItem('userInfo')
+    navigate('/')
+  }
+  
   return (
     <div className={styles.main}>
-      <div className={styles.name}>Login: {userInfo.name}</div>
+      <div className={styles.name} onClick={logout}>Login: {userInfo.name}</div>
       <div className={styles.wrapper}>
         {
           cards.map((item, index) => {

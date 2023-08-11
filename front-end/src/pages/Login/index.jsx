@@ -10,7 +10,7 @@ function Login () {
     const nameVal = nameRef.current.value
     const userInfo = {
       name: nameVal,
-      isAdmin: nameVal === 'tom'
+      isAdmin: nameVal === 'Tom' || nameVal === 'tom'
     }
     localStorage.setItem('userInfo', JSON.stringify(userInfo))
     navigate('/main')
@@ -35,6 +35,7 @@ function Login () {
         <p>简清</p>
         <p>+86 18079050420</p>
         <p>jessexinyu@foxmail.com</p>
+        <p>管理员: Tom, 用户: Mary</p>
       </div>
     </div>
   )
