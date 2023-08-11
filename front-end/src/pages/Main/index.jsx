@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import styles from './index.module.css'
 
 function Main () {
+  const inputRef = useRef('')
   // get UserInfo
   let userInfo = localStorage.getItem('userInfo')
   if (userInfo !== '' && userInfo !== undefined && userInfo !== null) {
@@ -11,23 +12,40 @@ function Main () {
   const [cards, setCards] = useState([
     {
       index: 1,
-      value: '123',
-      active: false
+      value: '',
+      active: false,
+      editing: false
     },
     {
       index: 2,
       value: '',
-      active: false
+      active: false,
+      editing: false
     },
     {
       index: 3,
       value: '',
-      active: false
+      active: false,
+      editing: false
     }
   ])
   const [showIndex, setShowIndex] = useState(0)
+
+  // 重置卡片状态
+  const resetCard = () => {
+    if (inputRef.current) {
+      inputRef.current.value = ''
+    }
+    const newCards = cards.map((item, index) => {
+      item.active = false
+      item.editing = false
+      return item
+    })
+    setCards(newCards)
+  }
   // 根据点击卡片的面，调整方向
   const handleCardClick = (type, cardsItem) => {
+    resetCard()
     let newCards
     if (type === 'front') {
       newCards = cards.map((item) => {
@@ -46,19 +64,19 @@ function Main () {
     }
     setCards(newCards)
   }
-  useEffect(() => {
-    setShowIndex(1)
-  }, [])
+  // useEffect(() => {
+  //   setShowIndex(1)
+  // }, [])
   // 切换卡片
   const handleTriggerClick = (type) => {
     let index = showIndex
-
     if (type === 'left') {
       showIndex > 0 ? index-- : index = 0
     } else if (type === 'right') {
       showIndex < cards.length - 1 ? index++ : index = cards.length - 1
     }
     setShowIndex(index)
+    resetCard()
   }
   // operation
   const handleDel = () => {
@@ -73,6 +91,41 @@ function Main () {
       setShowIndex(0)
     }
   }
+  const handleEdit = () => {
+    const currentItem = cards[showIndex]
+    let newCards
+    newCards = cards.map((item, index) => {
+      
+      if (index === showIndex) {
+        // 如果没有翻到背面，则跳到背面
+        if (currentItem.active === false) item.active = true
+        // 设置为编辑状态
+        if (item.editing) {
+          let value = inputRef.current.value
+          item.value = value
+          item.editing = false
+        } else {
+          item.editing = true
+        }
+      }
+      
+      return item
+    })
+    setCards(newCards)
+  }
+  // 输入框
+  // const handleInput = (e, cardItem) => {
+  //   const value = e.target.value
+  //   const newCards = cards.map((item, index) => {
+  //     if (cardItem.index === item.index) {
+  //       item.value = value
+  //     }
+  //     return item
+  //   })
+  //   setCards(newCards)
+  //   e.stopPropagation()
+  //   return false
+  // }
   
   return (
     <div className={styles.main}>
@@ -86,7 +139,13 @@ function Main () {
                 key={index}
               >
                 <div onClick={() => handleCardClick('front', item)} className={styles.card_front}>{item.index}</div>
-                <div onClick={() => handleCardClick('back', item)} className={styles.card_back}>{item.value}</div>
+                <div onClick={() => handleCardClick('back', item)} className={styles.card_back}>
+                  {
+                    item.editing ? <input ref={inputRef} onClick={e => {
+                      e.stopPropagation()
+                    }} /> : item.value
+                  }
+                </div>
               </div>
             )
           })
@@ -94,10 +153,12 @@ function Main () {
         <div onClick={() => handleTriggerClick('left')} className={styles.triggerLeft}>previous</div>
         <div onClick={() => handleTriggerClick('right')} className={styles.triggerRight}>next</div>
       </div>
-      <div className={styles.operation}>
-        <button onClick={() => handleDel()} className={styles.del}>删除</button>
-        <button className={styles.edit}>修改</button>
-      </div>
+      {
+        userInfo.isAdmin && <div className={styles.operation}>
+          <button onClick={() => handleDel()} className={styles.del}>删除</button>
+          <button onClick={() => handleEdit()} className={styles.edit}>修改</button>
+        </div>
+      }
     </div>
   )
 }
