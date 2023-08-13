@@ -2,7 +2,10 @@ const db = require('../db')
 
 exports.add = async (req, res) => {
   const { word } = req.body
-  const { username, id } = req.auth
+  const { username, id, isAdmin } = req.auth
+  if (!isAdmin) {
+    return res.msg('只有管理员能够创建卡片！', 400)
+  }
   const params = {
     word,
     author: username,
@@ -29,6 +32,10 @@ exports.getList = async (req, res) => {
 }
 
 exports.del = async (req, res) => {
+  const { isAdmin } = req.auth
+  if (!isAdmin) {
+    return res.msg('只有管理员能够创建卡片！', 400)
+  }
   const { id } = req.body
   const sql = 'UPDATE cards SET is_deleted=1 WHERE id=?'
   const [ result ] = await db.promise().query(sql, id)
@@ -37,6 +44,10 @@ exports.del = async (req, res) => {
 }
 
 exports.update = async (req, res) => {
+  const { isAdmin } = req.auth
+  if (!isAdmin) {
+    return res.msg('只有管理员能够创建卡片！', 400)
+  }
   const { id, word } = req.body
   const { username, id: userid } = req.auth
   // 排除当前的id，查重

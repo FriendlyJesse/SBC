@@ -1,7 +1,7 @@
 const joi = require('joi')
 
 // 单词
-const word = joi.string().required()
+const word = joi.string().alphanum().required()
 // id
 const id = joi.number().integer().min(1).required()
 

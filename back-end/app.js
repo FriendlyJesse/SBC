@@ -2,6 +2,7 @@ const createError = require('http-errors')
 const express = require('express')
 const logger = require('morgan')
 const path = require('path')
+const cors = require('cors')
 const { expressjwt } = require('express-jwt')
 const { SECRET_KEY } = require('./config')
 
@@ -14,6 +15,7 @@ app.set('view engine', 'jade')
 app
   .use(logger('dev'))
   .use(express.json())
+  .use(cors())
   .use(express.urlencoded({ extended: false }))
   .use((req, res, next) => { // 信息反馈
     res.msg = (err, status = 200, data) => {
