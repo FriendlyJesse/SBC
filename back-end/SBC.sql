@@ -11,7 +11,7 @@
  Target Server Version : 80031
  File Encoding         : 65001
 
- Date: 13/08/2023 10:39:35
+ Date: 13/08/2023 13:50:10
 */
 
 SET NAMES utf8mb4;
@@ -37,9 +37,13 @@ CREATE TABLE `cards`  (
 -- ----------------------------
 INSERT INTO `cards` VALUES (1, 'cat', 'Mary', 4, '2023-08-12 13:56:48', '2023-08-13 02:14:02', 1);
 INSERT INTO `cards` VALUES (2, 'bull', 'Mary', 4, '2023-08-12 13:56:48', '2023-08-13 02:21:59', 1);
-INSERT INTO `cards` VALUES (3, 'red', 'Tom', 3, '2023-08-12 13:57:32', '2023-08-13 02:35:54', 0);
+INSERT INTO `cards` VALUES (3, 'red', 'Tom', 3, '2023-08-12 13:57:32', '2023-08-13 05:06:16', 1);
 INSERT INTO `cards` VALUES (4, 'bird', 'Mary', 4, '2023-08-12 13:58:07', '2023-08-12 13:58:07', 0);
 INSERT INTO `cards` VALUES (5, 'zoom', 'Tom', 3, '2023-08-13 02:16:46', '2023-08-13 02:16:46', 0);
+INSERT INTO `cards` VALUES (6, 'zoom', 'Tom', 3, '2023-08-13 02:40:41', '2023-08-13 02:40:41', 0);
+INSERT INTO `cards` VALUES (7, 'blue', 'Tom', 3, '2023-08-13 02:42:10', '2023-08-13 05:09:03', 1);
+INSERT INTO `cards` VALUES (8, '123456', 'Tom', 3, '2023-08-13 02:56:23', '2023-08-13 02:56:23', 0);
+INSERT INTO `cards` VALUES (9, 'hello', 'Tom', 3, '2023-08-13 04:57:36', '2023-08-13 04:57:36', 0);
 
 -- ----------------------------
 -- Table structure for users
@@ -50,12 +54,13 @@ CREATE TABLE `users`  (
   `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `isAdmin` tinyint(1) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
 INSERT INTO `users` VALUES (3, 'Tom', 1);
 INSERT INTO `users` VALUES (4, 'Mary', 0);
+INSERT INTO `users` VALUES (5, 'test', 0);
 
 SET FOREIGN_KEY_CHECKS = 1;
