@@ -1,10 +1,15 @@
 const createError = require('http-errors')
 const express = require('express')
 const logger = require('morgan')
+const path = require('path')
 const { expressjwt } = require('express-jwt')
 const { SECRET_KEY } = require('./config')
 
 const app = express()
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'jade')
 
 app
   .use(logger('dev'))

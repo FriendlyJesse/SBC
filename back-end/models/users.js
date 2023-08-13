@@ -12,7 +12,7 @@ exports.login = async (req, res) => {
   }
   const userinfo = rows[0]
   // 生成 Token
-  const token = jwt.sign({ username, id: userinfo.id }, SECRET_KEY,{ expiresIn: EXPIRES_IN })
+  const token = jwt.sign({ username, id: userinfo.id, isAdmin: userinfo.isAdmin }, SECRET_KEY,{ expiresIn: EXPIRES_IN })
   res.msg('登录成功！', 200, { token })
 }
 
