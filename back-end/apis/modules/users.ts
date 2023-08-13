@@ -1,7 +1,7 @@
 import { Router } from 'express'
-const expressJoi = require('@escook/express-joi')
 import usersModel from '../../models/users'
-const { loginSchema } = require('../../schema/user')
+import expressJoi from '../../middleware/validator'
+import { loginSchema } from '../../schema/user'
 
 const router = Router()
 

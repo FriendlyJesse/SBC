@@ -1,8 +1,8 @@
 import axios, { AxiosResponse, AxiosError } from 'axios'
-import { host } from './config'
+import { host, token } from './config'
 
 const headers = {
-  Authorization: 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik1hcnkiLCJpZCI6NCwiaXNBZG1pbiI6MCwiaWF0IjoxNjkxOTAzNDg0LCJleHAiOjE2OTE5Mzk0ODR9.Rhc4eFlhvk0FrILhFbZtvef6Eea_lFcRHeOgJx3UKtw'
+  Authorization: 'Bearer ' + token
 }
 
 export const getData = (url: string, params: any, fn: ( response: AxiosResponse ) => void) => {

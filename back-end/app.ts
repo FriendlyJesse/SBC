@@ -6,6 +6,7 @@ import { expressjwt } from 'express-jwt'
 import express, { Request, Response, NextFunction } from 'express'
 import CONFIG from './config/index'
 import apis from './apis'
+import Msg from './middleware/msg'
 
 const app = express()
 
@@ -18,15 +19,7 @@ app
   .use(express.json())
   .use(cors())
   .use(express.urlencoded({ extended: false }))
-  .use((req, res: any, next) => { // 信息反馈
-    res.msg = (err: string | Error, status = 200, data: any) => {
-      res.status(status).send({
-        message: err instanceof Error ? err.message : err,
-        data
-      })
-    }
-    next()
-  })
+  .use(Msg)
   .use(expressjwt({ secret: CONFIG.SECRET_KEY, algorithms: ['HS256'] }).unless({ path: ['/api/users/login'] }))
 
 // apis
