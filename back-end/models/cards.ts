@@ -1,6 +1,7 @@
 import db from '../db'
+import { Request, Response } from 'express'
 
-const add = async (req: any, res: any) => {
+const add = async (req: Request, res: Response) => {
   const { word } = req.body
   const { username, id, isAdmin } = req.auth
   if (!isAdmin) {
@@ -25,13 +26,13 @@ const add = async (req: any, res: any) => {
   res.msg('添加成功！')
 }
 
-const getList = async (req: any, res: any) => {
+const getList = async (req: Request, res: Response) => {
   const sql = 'SELECT * FROM cards WHERE is_deleted=0'
   const [ rows ] = await db.promise().query(sql)
   res.msg('获取成功！', 200, rows)
 }
 
-const del = async (req: any, res: any) => {
+const del = async (req: Request, res: Response) => {
   const { isAdmin } = req.auth
   if (!isAdmin) {
     return res.msg('只有管理员能够创建卡片！', 400)
@@ -43,7 +44,7 @@ const del = async (req: any, res: any) => {
   res.msg('删除成功！')
 }
 
-const update = async (req: any, res: any) => {
+const update = async (req: Request, res: Response) => {
   const { isAdmin } = req.auth
   if (!isAdmin) {
     return res.msg('只有管理员能够创建卡片！', 400)

@@ -7,6 +7,7 @@ import express, { Request, Response, NextFunction } from 'express'
 import CONFIG from './config/index'
 import apis from './apis'
 import Msg from './middleware/msg'
+import { } from './typings/global'
 
 const app = express()
 

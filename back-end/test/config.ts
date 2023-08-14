@@ -1,2 +1,2 @@
 export const host = 'http://localhost:3000/api'
-export const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik1hcnkiLCJpZCI6NCwiaXNBZG1pbiI6MCwiaWF0IjoxNjkxOTM1NTY4LCJleHAiOjE2OTE5NzE1Njh9._b7CFpRBmv1bujuGBBeichJKaE0U3OtMLj8Fgh-vEoM'
+export const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik1hcnkiLCJpZCI6NCwiaXNBZG1pbiI6MCwiaWF0IjoxNjkxOTc4Nzk3LCJleHAiOjE2OTIwMTQ3OTd9.RyupsOQm3flP2iYAz_bS6U1fFrRKsf2kKa_j4_22oME'

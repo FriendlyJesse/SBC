@@ -3,7 +3,7 @@ import CONFIG from '../config'
 import db from '../db'
 import jwt from 'jsonwebtoken'
 
-const login = async (req: Request, res: any) => {
+const login = async (req: Request, res: Response) => {
   const { username } = req.body
   // 根据用户名查询用户的信息
   const sql = 'SELECT * FROM users WHERE username=?'
@@ -17,7 +17,7 @@ const login = async (req: Request, res: any) => {
   res.msg('登录成功！', 200, { token })
 }
 
-const add = async (req: Request, res: any) => {
+const add = async (req: Request, res: Response) => {
   const { username } = req.body
   const params = {
     username,
